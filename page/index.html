@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>个人博客</title>
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/index.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <header class="header">
+        <div class="container">
+            <a href="/" class="title">我的个人博客 | 技术博客</a>
+            <ul class="menu">
+                <li><a href="/">首页</a></li>
+                <li><a href="/sitemap.html">地图</a></li>
+                <li><a href="/about.html">关于</a></li>
+                <li><a href="/guestbook.html">留言</a></li>
+            </ul>
+            <div class="search-bar">
+                <input type="text" name="" id="" placeholder="输入关键词查找">
+                <button>搜索</button>
+            </div>
+        </div>
+    </header>
+    <section class="content">
+        <div class="content-left">
+            <div class="every-day" id="every-day">
+                <span>每日一句</span>
+                <p v-html="getContent"></p>
+            </div>
+
+            <div class="article-list" id="article-list">
+                <div class="article" v-for="article in articleList">
+                    <a v-bind:href="article.link" class="article-title">{{ article.title }}</a>
+                    <p class="article-content">
+                        {{ article.content }}
+                    </p>
+                    <div class="article-foot">发布于 {{ article.date }} | 浏览({{ article.views }}) | Tags：{{ article.tags }}
+                    </div>
+                </div>
+                <div class="page-tool">
+                    <ul>
+                        <li v-for="pageNum in pageNumList" v-on:click="jumpTo(pageNum.page)"
+                            v-bind:class="{'now-page':(pageNum.text == page)}">{{ pageNum.text }}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="content-right">
+            <div class="right-module" id="random-tags">
+                <div class="headline">随机标签云</div>
+                <a v-bind:href="tag.link" v-for="tag in tags" v-bind:style="{color: randomColor(), fontSize: randomSize()}">{{ tag.tag }}</a>
+            </div>
+
+            <div class="right-module" id="new-hot">
+                <div class="headline">最近热门</div>
+                <ul>
+                    <li v-for="temp in titleList">
+                        <a v-bind:href="temp.link">{{ temp.title }}</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="right-module" id="new-comments">
+                <div class="headline">最新评论</div>
+                <ul>
+                    <li v-for="comment in commentList">
+                        <div>
+                            <span>{{ comment.name }}</span>
+                            <span class="pull-right">{{ comment.date }}</span>
+                        </div>
+                        <p><a href="#">{{ comment.comment }}</a></p>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="right-module">
+                <div class="headline">友情链接</div>
+                <span><a href="#">友情链接</a></span>
+                <span><a href="#">友情链接</a></span>
+                <span><a href="#">友情链接</a></span>
+                <span><a href="#">友情链接</a></span>
+                <span><a href="#">友情链接</a></span>
+                <span><a href="#">友情链接</a></span>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+        <ul>
+            <li><a href="#">/c++1</a></li>
+            <li><a href="#">/c++2</a></li>
+            <li><a href="#">/c++3</a></li>
+            <li><a href="#">/c++4</a></li>
+            <li><a href="#">/c++5</a></li>
+            <li><a href="#">/c++6</a></li>
+            <li><a href="#">/c++7</a></li>
+            <li><a href="#">/c++8</a></li>
+            <li><a href="#">/c++9</a></li>
+            <li><a href="#">/c++10</a></li>
+            <li><a href="#">/c++11</a></li>
+            <li><a href="#">/c++12</a></li>
+        </ul>
+        <p>Copyright © 2010-2019 仿郑晓个人博客 All rights reserved. 由免费开源的WordPress强力驱动. 鲁ICP备14017955号站长统计</p>
+    </footer>
+</body>
+<script src="./js/axios.min.js"></script>
+<script src="./js/base.js"></script>
+<script src="./js/index.js"></script>
+
+</html>
